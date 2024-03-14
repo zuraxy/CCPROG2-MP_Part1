@@ -2,82 +2,66 @@
 
 inline
 void
-selectionSortString(string arrString[], int n)
-{
-	string temp;
-	int max = 0;
-	for (int i = 0; i < n - 1; i++)
-	{
-		max = i;
-		for (int j = i + 1; j < n; j++)
-			if (strcmp(arrString[max], arrString[j]) < 0)
-				max = j;
-
-		if (max != i)
-		{
-			strcpy(temp, arrString[i]);
-			strcpy(arrString[i], arrString[max]);
-			strcpy(arrString[max], temp);
-		}
-	}
-}
-
-inline
-void
-selectionSortDouble(double arrDouble[], int n)
-{
-	double temp = 0;
-	int max = 0;
-	for (int i = 0; i < n - 1; i++)
-	{
-		max = i;
-		for (int j = i + 1; j < n; j++)
-			if (arrDouble[max] < arrDouble[j])
-				max = j;
-
-		if (max != i)
-		{
-			temp = arrDouble[i];
-			arrDouble[i] = arrDouble[max];
-			arrDouble[max] = temp;
-		}
-	}
-}
-
-inline
-int
-binarySearch(string strArr[], string key, int n)
-{
-	int low = 0, high = n, mid;
-	while (high >= low)
-	{
-		mid = low + (high - low) / 2;
-		if (strcmp(strArr[mid], key) == 0)
-			return mid;
-		else if (strcmp(key, strArr[mid]) > 0)
-			high = mid - 1;
-		else if (strcmp(key, strArr[mid]) < 0)
-			low = mid + 1;
-	}
-	return -1;
-}
-
-inline
-void
-printData(string location[], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		printf("str[%d]: %s", i, location[i]);
-	}
-}
-
-inline
-void
 caller(string strArr[], string key, int n)
 {
-	printData(strArr, n);
+	printStringData(strArr, n);
 	selectionSortString(strArr, n);
-	printData(strArr, n);
-	printf("index: %d",binarySearch(strArr, key, n));
+	printStringData(strArr, n);
+	printf("index: %d",binarySearchString(strArr, key, n));
+}
+
+inline 
+void
+Q2_Question(string location[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
+	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
+	double secondhandSmoke[], double unsafeSex[], int rowsOfData)
+{
+	int invalid = 1;
+	double tempCountry[5][14]; //[country][parameter]
+
+	printf("Please input 5 countries: ");
+
+	//initialize
+	string countries[5];
+	strcpy(countries[0],"China");
+	strcpy(countries[0], "Dominican_Republic");
+	strcpy(countries[0], "Philippines");
+	strcpy(countries[0], "Taiwan");
+	strcpy(countries[0], "Japan");
+
+	//sort then find if these are valid
+	selectionSortString(location, rowsOfData);
+
+	while (invalid)
+	{
+		if (binarySearchString(location, countries[0], rowsOfData) && binarySearchString(location, countries[1], rowsOfData) &&
+			binarySearchString(location, countries[2], rowsOfData) && binarySearchString(location, countries[3], rowsOfData) &&
+			binarySearchString(location, countries[4], rowsOfData))
+		{
+			invalid = 0;
+			
+			for (int i = 0; i < 5; i++)
+			{
+				tempCountry[i][0] = airPollution[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][1] = ambientPM[linearSearchString(location, countries[i], rowsOfData)];;
+				tempCountry[i][2] = ozone[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][3] = HAP[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][4] = environ[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][5] = occup[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][6] = unsafeWash[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][7] = metabolic[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][8] = dietary[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][9] = plasma[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][10] = tobacco[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][11] = smoking[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][12] = secondhandSmoke[linearSearchString(location, countries[i], rowsOfData)];
+				tempCountry[i][13] = unsafeSex[linearSearchString(location, countries[i], rowsOfData)];
+				selectionSortDouble(tempCountry[i], 14);
+			}
+		}
+
+		else
+			printf("Invalid input data. Please input a new dataset.");
+	}
+
 }
