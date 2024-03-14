@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define ROWSOFDATA 203
-#define COLUMNSOFDATA 16
+#define MAX_ROWS 203
 
-typedef char string[50]; //32 highest string length in data provided but for buffer just set 50 as size
+#include "Q1_To_Q3.c"
 
 int
 getDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
@@ -38,11 +37,11 @@ printDataSet(string location[], double baseLE[], double airPollution[], double a
 
 int main()
 {
-	string location[ROWSOFDATA];
+	string location[MAX_ROWS];
 	int rowsOfData;
-	double baseLE[ROWSOFDATA], airPollution[ROWSOFDATA], ambientPM[ROWSOFDATA], ozone[ROWSOFDATA], HAP[ROWSOFDATA],
-		environ[ROWSOFDATA], occup[ROWSOFDATA], unsafeWash[ROWSOFDATA], metabolic[ROWSOFDATA], dietary[ROWSOFDATA],
-		plasma[ROWSOFDATA], tobacco[ROWSOFDATA], smoking[ROWSOFDATA], secondhandSmoke[ROWSOFDATA], unsafeSex[ROWSOFDATA];
+	double baseLE[MAX_ROWS], airPollution[MAX_ROWS], ambientPM[MAX_ROWS], ozone[MAX_ROWS], HAP[MAX_ROWS],
+		environ[MAX_ROWS], occup[MAX_ROWS], unsafeWash[MAX_ROWS], metabolic[MAX_ROWS], dietary[MAX_ROWS],
+		plasma[MAX_ROWS], tobacco[MAX_ROWS], smoking[MAX_ROWS], secondhandSmoke[MAX_ROWS], unsafeSex[MAX_ROWS];
 
 	rowsOfData = getDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
 							environ, occup, unsafeWash, metabolic, dietary,
@@ -52,6 +51,9 @@ int main()
 		environ, occup, unsafeWash, metabolic, dietary,
 		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
 
+	Q1_Question(location, baseLE, airPollution, ambientPM, ozone, HAP,
+		environ, occup, unsafeWash, metabolic, dietary,
+		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
 
 	return 0;
 }
