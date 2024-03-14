@@ -25,51 +25,32 @@ getDataSet(string location[], double baseLE[], double airPollution[], double amb
 void
 printDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
-	plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[])
+	plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[], int rowsOfData)
 {
-	for (int rowsOfData = 0; rowsOfData < ROWSOFDATA; rowsOfData++)
+	for (int row = 0; row < rowsOfData; row++)
 	{
-		for (int currentColumn = 0; currentColumn < COLUMNSOFDATA; currentColumn++)
-		{
-			switch (currentColumn)
-			{
-			case 0:printf("%32s", location[rowsOfData]); break;
-			case 1:printf("%10lf", airPollution[rowsOfData]); break;
-			case 2:printf("%10lf", ambientPM[rowsOfData]); break;
-			case 3:printf("%10lf", ozone[rowsOfData]); break;
-			case 4:printf("%10lf", HAP[rowsOfData]); break;
-			case 5:printf("%10lf", environ[rowsOfData]); break;
-			case 6:printf("%10lf", occup[rowsOfData]); break;
-			case 7:printf("%10lf", unsafeWash[rowsOfData]); break;
-			case 8:printf("%10lf", metabolic[rowsOfData]); break;
-			case 9:printf("%10lf", dietary[rowsOfData]); break;
-			case 10:printf("%10lf", plasma[rowsOfData]); break;
-			case 11:printf("%10lf", tobacco[rowsOfData]); break;
-			case 12:printf("%10lf", smoking[rowsOfData]); break;
-			case 13:printf("%10lf", secondhandSmoke[rowsOfData]); break;
-			case 14:printf("%10lf", unsafeSex[rowsOfData]); break;
-			case 15:printf("%10lf", airPollution[rowsOfData]); break;
-			default:
-				break;
-			}
-		}
+		printf("%32s %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf %10lf",
+			location[row], airPollution[row], ambientPM[row], ozone[row], HAP[row], environ[row], occup[row], 
+			unsafeWash[row], metabolic[row], dietary[row], plasma[row], tobacco[row], smoking[row], secondhandSmoke[row],
+			unsafeSex[row], airPollution[row]);
 	}
 }
 
 int main()
 {
 	string location[ROWSOFDATA];
+	int rowsOfData;
 	double baseLE[ROWSOFDATA], airPollution[ROWSOFDATA], ambientPM[ROWSOFDATA], ozone[ROWSOFDATA], HAP[ROWSOFDATA],
 		environ[ROWSOFDATA], occup[ROWSOFDATA], unsafeWash[ROWSOFDATA], metabolic[ROWSOFDATA], dietary[ROWSOFDATA],
 		plasma[ROWSOFDATA], tobacco[ROWSOFDATA], smoking[ROWSOFDATA], secondhandSmoke[ROWSOFDATA], unsafeSex[ROWSOFDATA];
 
-	getDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
-		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex);
+	rowsOfData = getDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
+							environ, occup, unsafeWash, metabolic, dietary,
+							plasma, tobacco, smoking, secondhandSmoke, unsafeSex);
 
 	printDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
 		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex);
+		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
 
 
 	return 0;
