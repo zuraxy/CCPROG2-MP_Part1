@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_ROWS 203
+#include "Q1.c"
+#include "Q2.c"
+#include "definitions.c"
 
-#include "Q1_To_Q3.c"
 
 int
 getDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
@@ -47,13 +48,15 @@ int main()
 							environ, occup, unsafeWash, metabolic, dietary,
 							plasma, tobacco, smoking, secondhandSmoke, unsafeSex);
 
-	printDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
+	/*printDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
 		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
+		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);*/
 
 	Q1_Question(location, baseLE, airPollution, ambientPM, ozone, HAP,
 		environ, occup, unsafeWash, metabolic, dietary,
 		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
+
+	caller(location, "Philippines", MAX_ROWS);
 
 	return 0;
 }
