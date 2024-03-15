@@ -14,10 +14,12 @@ Q3_Question(string location[], double baseLE[], double airPollution[], double am
 	strcpy(country1, "China");
 	strcpy(country2, "Philippines");
 
-	while (invalid)
+	while (invalid==1)
 	{
-		if (linearSearchString(location, country1, rowsOfData) && linearSearchString(location, country2, rowsOfData))
-			printf("%s\t\t%s"
+		if (linearSearchString(location, country1, rowsOfData)!=-1 && linearSearchString(location, country2, rowsOfData)!=-1)
+		{
+			invalid = 0;
+			printf("\n\n%s\t\t\t%s\n\n"
 				"%lf\t\t%lf | baseLineLE\n"
 				"%lf\t\t%lf | LE Air Pollution\n"
 				"%lf\t\t%lf | Ambient PM\n"
@@ -47,7 +49,12 @@ Q3_Question(string location[], double baseLE[], double airPollution[], double am
 				smoking[linearSearchString(location, country1, rowsOfData)], smoking[linearSearchString(location, country2, rowsOfData)],
 				secondhandSmoke[linearSearchString(location, country1, rowsOfData)], secondhandSmoke[linearSearchString(location, country2, rowsOfData)],
 				unsafeSex[linearSearchString(location, country1, rowsOfData)], unsafeSex[linearSearchString(location, country2, rowsOfData)]);
+		}
 		else
-			printf("Invalid inputs. Please enter a new set of data.\n");
+		{
+			printf("Invalid input(s). Please enter a new set of data.\n");
+			//if(valid)
+			invalid = 0;
+		}
 	}
 }
