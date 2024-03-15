@@ -1,4 +1,4 @@
-#include "definitions.c"
+#include "definitions.h"
 
 inline
 void

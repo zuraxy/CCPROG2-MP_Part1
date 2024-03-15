@@ -2,9 +2,7 @@
 #include "Q1.c"
 #include "Q2.c"
 #include "Q3.c"
-#include "definitions.c"
-
-typedef char string[50];
+#include "definitions.h"
 
 int
 getDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
