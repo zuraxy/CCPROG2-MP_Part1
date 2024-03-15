@@ -39,7 +39,7 @@ void Q4_Answer(string location[], double baseLE[], int rowsOfData, string option
 	printf("\n\n");
 }
 
-
+inline
 void Q4_Question(string location[], double baseLE[], int rowsOfData) {
 	printf("The question you wanted to ask is:\n"
 		"Are there locations that have values <greater/less> than the average value of life expectancy (not including global)? "
