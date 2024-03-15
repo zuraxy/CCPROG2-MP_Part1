@@ -10,13 +10,45 @@ getDataSet(string location[], double baseLE[], double airPollution[], double amb
 	plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[])
 {
 	int rowsOfData = 0;
+	int i;
+	string strTemp;
+	
 	while (scanf("%s %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf",
 		location[rowsOfData], &baseLE[rowsOfData], &airPollution[rowsOfData], &ambientPM[rowsOfData], &ozone[rowsOfData],
 		&HAP[rowsOfData], &environ[rowsOfData], &occup[rowsOfData], &unsafeWash[rowsOfData],
 		&metabolic[rowsOfData], &dietary[rowsOfData], &plasma[rowsOfData], &tobacco[rowsOfData],
 		&smoking[rowsOfData], &secondhandSmoke[rowsOfData], &unsafeSex[rowsOfData]) == 16)
 		rowsOfData++;
-
+	
+	if(strcmp(location[0], "Global") != 0) {
+		for(i = 0; i < rowsOfData; i++) {
+			if(strcmp(location[i], "Global") == 0) {
+				strcpy(strTemp, location[0]);
+				strcpy(location[0], location[i]);
+				strcpy(location[i], strTemp);
+			}
+		}
+	}
+	
+	if(strcmp(location[0], "Global") != 0) {
+		for(i = rowsOfData; i >= 0; i--) {
+			strcpy(location[i], location[i - 1]);
+			baseLE[i] = baseLE[i - 1];
+			airPollution[i] = airPollution[i - 1];
+			ambientPM[i] = ambientPM[i - 1];
+			ozone[i] = ozone[i - 1];
+			metabolic[i] = metabolic[i - 1];
+			dietary[i] = dietary[i - 1];
+			plasma[i] = plasma[i - 1];
+			tobacco[i] = tobacco[i - 1];
+			smoking[i] = smoking[i - 1];
+			secondhandSmoke[i] = secondhandSmoke[i - 1];
+			unsafeSex[i] = unsafeSex[i - 1];
+		}
+		strcpy(location[0], "Global");
+		rowsOfData++;
+	}
+	
 	return rowsOfData;
 }
 
