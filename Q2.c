@@ -45,63 +45,64 @@ Q2_Question(string location[], double airPollution[], double ambientPM[], double
 				tempCountry[i][13] = unsafeSex[linearSearchString(location, countries[i], rowsOfData)];
 				selectionSortDouble(tempCountry[i], 14);
 				
+				printf("\n\n%s's top 5 risk factors in descending order: \n", countries[i]);
 				for (int j = 0; j < 5; j++)
 				{
 					if (tempCountry[i][j] == airPollution[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. airPollution\n", i + 1);
+						printf("%d. airPollution [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == ambientPM[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. ambientPM\n", i + 1);
+						printf("%d. ambientPM [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == ozone[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. ozone\n", i + 1);
+						printf("%d. ozone [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == HAP[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. HAP\n", i + 1);
+						printf("%d. HAP [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == environ[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. environ\n", i + 1);
+						printf("%d. environ [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == occup[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. occup\n", i + 1);
+						printf("%d. occup [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == unsafeWash[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. unsafeWash\n", i + 1);
+						printf("%d. unsafeWash [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == metabolic[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. metabolic\n", i + 1);
+						printf("%d. metabolic [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == dietary[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. dietary\n", i + 1);
+						printf("%d. dietary [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == plasma[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. plasma\n", i + 1);
+						printf("%d. plasma [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == tobacco[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. tobacco\n", i + 1);
+						printf("%d. tobacco [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == smoking[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. smoking\n", i + 1);
+						printf("%d. smoking [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == secondhandSmoke[linearSearchString(location, countries[i], rowsOfData)])
 					{
-						printf("%d. secondhandSmoke\n", i + 1);
+						printf("%d. secondhandSmoke [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 					if (tempCountry[i][j] == unsafeSex[linearSearchString(location, countries[i], rowsOfData)])
 					{ 
-						printf("%d. unsafeSex\n", i + 1);
+						printf("%d. unsafeSex [%lf] \n", j + 1, tempCountry[i][j]);
 					}
 				}
 			}
