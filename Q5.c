@@ -1,59 +1,53 @@
-inline
+#include "definitions.h"
+
 void Q5_Answer(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
-	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
-	plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[], int rowsOfData, double num) {
-	int i, j, m;
-	double temp;
-	string temp2;
+		environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
+		plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[], int rowsOfData, double num) {
+	int i, j = 0, k = 0, m;
 	int ctrMin = 0, ctrMax = 0, min = 1, max = 1; // assume that 1st country is lowest/largest (and skip global at index 0)
-	string factorsMin[14];
-	double factorsMinVal[14];
-	string factorsMax[14];
-	double factorsMaxVal[14];
-
-	for (i = 1; i < rowsOfData; i++) {	// finding indexes of country with min baseLE and country with max baseLE
-		if (baseLE[min] > baseLE[i])
+	double factorsMinVal[14], factorsMaxVal[14];
+	double temp;
+	string factorsMin[14], factorsMax[14];
+	string temp2;
+	
+	string factorsList[14] = {"Air Pollution", "Ambient PM", "Ozone", "HAP", "Environ/Occup", "Occup", "Unsafe WaSH", "Metabolic",
+								"Dietary", "High fasting plasma glucose", "Tobacco", "Smoking", "Secondhand Smoke", "Unsafe Sex"};
+	
+	// finding indexes of country with min baseLE and country with max baseLE
+	for(i = 1; i < rowsOfData; i++) {
+		if(baseLE[min] > baseLE[i])
 			min = i;
-
-		if (baseLE[max] < baseLE[i])
+		
+		if(baseLE[max] < baseLE[i])
 			max = i;
 	}
-
-	// counting number of factors that exceed num per country and copying names and values into new arrays
-
-	j = 0;
-	if (airPollution[min] > num) { ctrMin++; strcpy(factorsMin[j], "Air_Pollution");	factorsMinVal[j] = airPollution[min]; j++; }
-	if (ambientPM[min] > num) { ctrMin++; strcpy(factorsMin[j], "Ambient_PM"); 		factorsMinVal[j] = ambientPM[min]; j++; }
-	if (ozone[min] > num) { ctrMin++; strcpy(factorsMin[j], "Ozone"); 		factorsMinVal[j] = ozone[min]; j++; }
-	if (HAP[min] > num) { ctrMin++; strcpy(factorsMin[j], "HAP"); 		factorsMinVal[j] = HAP[min]; j++; }
-	if (environ[min] > num) { ctrMin++; strcpy(factorsMin[j], "Environ/Occup"); 	factorsMinVal[j] = environ[min]; j++; }
-	if (occup[min] > num) { ctrMin++; strcpy(factorsMin[j], "Occup"); 		factorsMinVal[j] = occup[min]; j++; }
-	if (unsafeWash[min] > num) { ctrMin++; strcpy(factorsMin[j], "Unsafe_WaSH"); 	factorsMinVal[j] = unsafeWash[min]; j++; }
-	if (metabolic[min] > num) { ctrMin++; strcpy(factorsMin[j], "Metabolic"); 		factorsMinVal[j] = metabolic[min]; j++; }
-	if (dietary[min] > num) { ctrMin++; strcpy(factorsMin[j], "Dietary"); 		factorsMinVal[j] = dietary[min]; j++; }
-	if (plasma[min] > num) { ctrMin++; strcpy(factorsMin[j], "High_fasting_plasma_glucose");	factorsMinVal[j] = plasma[min]; j++; }
-	if (tobacco[min] > num) { ctrMin++; strcpy(factorsMin[j], "Tobacco"); 		factorsMinVal[j] = tobacco[min]; j++; }
-	if (smoking[min] > num) { ctrMin++; strcpy(factorsMin[j], "Smoking"); 		factorsMinVal[j] = smoking[min]; j++; }
-	if (secondhandSmoke[min] > num) { ctrMin++; strcpy(factorsMin[j], "Secondhand_Smoke");	factorsMinVal[j] = secondhandSmoke[min]; j++; }
-	if (unsafeSex[min] > num) { ctrMin++; strcpy(factorsMin[j], "Unsafe_Sex"); 		factorsMinVal[j] = unsafeSex[min]; j++; }
-
-	j = 0;
-	if (airPollution[max] > num) { ctrMax++; strcpy(factorsMax[j], "Air_Pollution"); 	factorsMaxVal[j] = airPollution[max]; j++; }
-	if (ambientPM[max] > num) { ctrMax++; strcpy(factorsMax[j], "Ambient_PM"); 		factorsMaxVal[j] = ambientPM[max]; j++; }
-	if (ozone[max] > num) { ctrMax++; strcpy(factorsMax[j], "Ozone"); 		factorsMaxVal[j] = ozone[max]; j++; }
-	if (HAP[max] > num) { ctrMax++; strcpy(factorsMax[j], "HAP"); 		factorsMaxVal[j] = HAP[max]; j++; }
-	if (environ[max] > num) { ctrMax++; strcpy(factorsMax[j], "Environ/Occup"); 	factorsMaxVal[j] = environ[max]; j++; }
-	if (occup[max] > num) { ctrMax++; strcpy(factorsMax[j], "Occup"); 		factorsMaxVal[j] = occup[max]; j++; }
-	if (unsafeWash[max] > num) { ctrMax++; strcpy(factorsMax[j], "Unsafe_WaSH"); 	factorsMaxVal[j] = unsafeWash[max]; j++; }
-	if (metabolic[max] > num) { ctrMax++; strcpy(factorsMax[j], "Metabolic"); 		factorsMaxVal[j] = metabolic[max]; j++; }
-	if (dietary[max] > num) { ctrMax++; strcpy(factorsMax[j], "Dietary"); 		factorsMaxVal[j] = dietary[max]; j++; }
-	if (plasma[max] > num) { ctrMax++; strcpy(factorsMax[j], "High_fasting_plasma_glucose"); factorsMaxVal[j] = plasma[max]; j++; }
-	if (tobacco[max] > num) { ctrMax++; strcpy(factorsMax[j], "Tobacco"); 		factorsMaxVal[j] = tobacco[max]; j++; }
-	if (smoking[max] > num) { ctrMax++; strcpy(factorsMax[j], "Smoking"); 		factorsMaxVal[j] = smoking[max]; j++; }
-	if (secondhandSmoke[max] > num) { ctrMax++; strcpy(factorsMax[j], "Secondhand_Smoke"); factorsMaxVal[j] = secondhandSmoke[max]; j++; }
-	if (unsafeSex[max] > num) { ctrMax++; strcpy(factorsMax[j], "Unsafe_Sex"); 		factorsMaxVal[j] = unsafeSex[max]; j++; }
-
-	//selection sort
+	
+	double tempFactorsMinVal[14] = {airPollution[min], ambientPM[min], ozone[min], HAP[min], environ[min], occup[min],
+								unsafeWash[min], metabolic[min], dietary[min], plasma[min], tobacco[min],
+								smoking[min], secondhandSmoke[min], unsafeSex[min]};
+	double tempFactorsMaxVal[14] = {airPollution[max], ambientPM[max], ozone[max], HAP[max], environ[max], occup[max],
+								unsafeWash[max], metabolic[max], dietary[max], plasma[max], tobacco[max],
+								smoking[max], secondhandSmoke[max], unsafeSex[max]};
+	
+	// counting number of factors that exceed num per country
+	// and copying names and values into new arrays
+	for(i = 0; i < 14; i++) {
+		if(tempFactorsMinVal[i] > num) {
+			factorsMinVal[j] = tempFactorsMinVal[i];
+			strcpy(factorsMin[j], factorsList[i]);
+			ctrMin++;
+			j++;
+		}
+		
+		if(tempFactorsMaxVal[i] > num) {
+			factorsMaxVal[k] = tempFactorsMaxVal[i];
+			strcpy(factorsMax[k], factorsList[i]);
+			ctrMax++;
+			k++;
+		}
+	}
+	
+	//selection sort for factors of country with min LE
 	for (i = 0; i < ctrMin - 1; i++) {
 		m = i;
 
@@ -69,10 +63,11 @@ void Q5_Answer(string location[], double baseLE[], double airPollution[], double
 
 			strcpy(temp2, factorsMin[i]);
 			strcpy(factorsMin[i], factorsMin[m]);
-			strcpy(factorsMin[i], temp2);
+			strcpy(factorsMin[m], temp2);
 		}
 	}
-
+	
+	//selection sort for factors of country with max LE
 	for (i = 0; i < ctrMax - 1; i++) {
 		m = i;
 
@@ -88,52 +83,43 @@ void Q5_Answer(string location[], double baseLE[], double airPollution[], double
 
 			strcpy(temp2, factorsMax[i]);
 			strcpy(factorsMax[i], factorsMax[m]);
-			strcpy(factorsMax[i], temp2);
+			strcpy(factorsMax[m], temp2);
 		}
 	}
-
+		
 	printf("Country with minimum LE: %s\n", location[min]);
 	printf("%d factors\n", ctrMin);
-	for (i = 0; i < ctrMin; i++) {
+	
+	for(i = 0; i < ctrMin; i++) {
 		printf("%s\n", factorsMin[i]);
 	}
-	printf("\n\n");
-
+	printf("\n");
+	
 	printf("Country with maximum LE: %s\n", location[max]);
 	printf("%d factors\n", ctrMax);
-	for (i = 0; i < ctrMax; i++) {
+	for(i = 0; i < ctrMax; i++) {
 		printf("%s\n", factorsMax[i]);
 	}
 }
 
-void Q4_Question(string location[], double baseLE[], int rowsOfData) {
-	printf("The question you wanted to ask is:\n"
-		"Are there locations that have values <greater/less> than the average value of life expectancy (not including global)? "
-		"If yes, how many? (print array of strings)\n"
-		"Please input 'greater' or 'less': \n");
-
-	//since we cannot have inputs from the keyboard due to input redirection - the file is the one being read[], we initialize values instead.
-	string option;
-	strcpy(option, "greater"); //copy to option
-
-	Q4_Answer(location, baseLE, rowsOfData, option);
-}
-
-
-inline
 void Q5_Question(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
-	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
-	plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[], int rowsOfData) {
+		environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
+		plasma[], double tobacco[], double smoking[], double secondhandSmoke[], double unsafeSex[], int rowsOfData) {
+	int i;
+	
 	printf("The question you wanted to ask is:\n"
-		"Indicate and compare the countries with minimum and maximum LE. "
-		"For each of the two countries, how many factors affecting LE exceed the value of <number>, "
-		"and what are those identified factors, arranged in ascending order for each? (print array of strings)\n");
-
+			"Indicate and compare the countries with minimum and maximum LE. "
+			"For each of the two countries, how many factors affecting LE exceed the value of <number>, "
+			"and what are those identified factors, arranged in ascending order for each? (print array of strings)");
+			
 	//since we cannot have inputs from the keyboard due to input redirection - the file is the one being read[], we initialize values instead.
-
-	double num = 1.0;
-
-	Q5_Answer(location, baseLE, airPollution, ambientPM, ozone, HAP, environ, occup,
-		unsafeWash, metabolic, dietary, plasma, tobacco, smoking, secondhandSmoke,
-		unsafeSex, rowsOfData, num);
+	
+	double num[3] = {1.0, 2.0, 5.0};
+	
+	for(i = 0; i < 3; i++) {
+		printf("\n\nTest case %d: When input is %lf\n", (i + 1), num[i]);
+		Q5_Answer(location, baseLE, airPollution, ambientPM, ozone, HAP, environ, occup, 
+				unsafeWash, metabolic, dietary, plasma, tobacco, smoking, secondhandSmoke,
+				unsafeSex, rowsOfData, num[i]);
+	}
 }
