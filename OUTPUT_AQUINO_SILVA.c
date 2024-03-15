@@ -30,35 +30,20 @@ Set Parameters for Q3: How do <countryA> and <countryB>'s parameter risk factors
 
 
 China			Philippines
-
 77.582175		71.798423
-
 1.850731		1.675681
-
 1.393518		0.691634
-
 0.074187		0.002370
-
 0.340365		0.929484
-
 2.861276		2.383616
-
 0.352632		0.224457
-
 0.017428		0.242926
-
 4.716210		6.165008
-
 2.028728		2.162167
-
 0.987177		1.885343
-
 2.777920		2.575556
-
 2.437863		2.159935
-
 0.386617		0.460448
-
 0.090016		0.164648The question you wanted to ask is:
 Are there locations that have values <greater/less> than the average value of life expectancy (not including global)? If yes, how many? (print array of strings)
 Please input 'greater' or 'less': 
