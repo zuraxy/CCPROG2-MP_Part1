@@ -69,7 +69,11 @@ typedef char string[50]; //32 highest string length in data provided but for buf
     may not be easy to understand to the person reading the codes. 
 */
 
-
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function retrieves the dataset fed/provided to it by using the scan function to get values.
+	b. Parameters: The parameters serve as the dataset's parameter risk factors (while also including the location and the Base Life Expectancy)
+	c. Return type: This function returns an integer value which indicates how many rows of values were retrieved and scanned  
+*/
 int
 getDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double
@@ -83,9 +87,10 @@ getDataSet(string location[], double baseLE[], double airPollution[], double amb
 		location[rowsOfData], &baseLE[rowsOfData], &airPollution[rowsOfData], &ambientPM[rowsOfData], &ozone[rowsOfData],
 		&HAP[rowsOfData], &environ[rowsOfData], &occup[rowsOfData], &unsafeWash[rowsOfData],
 		&metabolic[rowsOfData], &dietary[rowsOfData], &plasma[rowsOfData], &tobacco[rowsOfData],
-		&smoking[rowsOfData], &secondhandSmoke[rowsOfData], &unsafeSex[rowsOfData]) == 16)
-		rowsOfData++;
+		&smoking[rowsOfData], &secondhandSmoke[rowsOfData], &unsafeSex[rowsOfData]) == 16) //scans data as long as it is able to scan 16 proper values.
+		rowsOfData++; //indicate how many rows the data has
 
+	//handle global not being in index 0
 	if (strcmp(location[0], "Global") != 0) {
 		for (i = 0; i < rowsOfData; i++) {
 			if (strcmp(location[i], "Global") == 0) {
@@ -96,6 +101,7 @@ getDataSet(string location[], double baseLE[], double airPollution[], double amb
 		}
 	}
 
+	//handle global not being in index 0
 	if (strcmp(location[0], "Global") != 0) {
 		for (i = rowsOfData; i >= 0; i--) {
 			strcpy(location[i], location[i - 1]);
@@ -111,13 +117,18 @@ getDataSet(string location[], double baseLE[], double airPollution[], double amb
 			secondhandSmoke[i] = secondhandSmoke[i - 1];
 			unsafeSex[i] = unsafeSex[i - 1];
 		}
-		strcpy(location[0], "Global");
+		strcpy(location[0], "Global"); //put global to index 0
 		rowsOfData++;
 	}
 
-	return rowsOfData;
+	return rowsOfData; //this return statement dictates how many rows of data there are
 }
 
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function uses a linear search algorithm in attempting to find if a given string is present in the provided dataset
+	b. Parameters: string arrString[] is the general dataset or the array of strings where key will be performed a linear search upon. string key is the string that the algorithm is trying to find. n is the number of values in the array dataset.
+	c. Return type:
+*/
 int
 linearSearchString(string arrString[], string key, int n)
 {
@@ -127,7 +138,10 @@ linearSearchString(string arrString[], string key, int n)
 	return -1;
 }
 
-//inline
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function utilizes a selectionSort algorithm to sort an array of type double.
+	b. Parameters: double arrDouble[] is the general array dataset that is trying to be sorted. int n indicates the number of elements in the provided dataset.
+*/
 void
 selectionSortDouble(double arrDouble[], int n)
 {
@@ -149,6 +163,49 @@ selectionSortDouble(double arrDouble[], int n)
 	}
 }
 
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function is used to answer Question 1 by checking the users' options and thereby comparing numbers to see if the condition is met and how many countries have met the condition provided.
+	b. Parameters: This function uses location - countries that qualify the condition are copied into an array found in main.
+					Other parameters are the general self-explanatory param_risk_factor which are selected by the user and used as filters or conditions
+					int rowsOfData contains the number of data in the given dataset
+					double number is the number being compared with a country's param_risk_factor
+					string qualifiedterritories[] is the array where qualifying countries will be stored
+					string parameter is the selected and specified parameter_risk_factor used as filter/condition
+					string option is the selected option or operator - greater than or less than
+
+	c. Return type: this function returns an integer which indicate how many countries qualified given the conditions.
+    
+	a. Q1: How many countries have values <greater/less> than <number> in <param_risk_factor>? Also, what are the names of these countries? (print array of strings)
+	b. A1: Thereafter, type the answer number, and the corresponding expected answer.
+    
+    For example: 
+      Q1:  Which country has the lowest baseline life expectancy?
+      A1: When <greater/less> is set to “greater”, <number> is set to 2.5, and <param_risk_factor> is set to “Air_Pollution”, the answer is as follows.
+			22 countries
+
+			Benin
+			Haiti
+			Myanmar
+			Mali
+			Guinea-Bissau
+			Madagascar
+			Afghanistan
+			India
+			Sierra_Leone
+			Burkina_Faso
+			Laos
+			Guinea
+			Pakistan
+			Chad
+			Bangladesh
+			Vanuatu
+			Somalia
+			Nepal
+			Niger
+			North_Korea
+			Papua_New_Guinea
+			Solomon_Islands
+*/
 int
 Q1(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
@@ -158,8 +215,8 @@ Q1(string location[], double baseLE[], double airPollution[], double ambientPM[]
 
 	for (int i = 0; i < rowsOfData; i++)
 	{
-		if (strcmp(option, "greater") == 0)
-		{
+		if (strcmp(option, "greater") == 0) //handler when chosen option is greater
+		{ //full of strcmps. These are used to check which parameter should be used as the condition or filter
 			if(strcmp(parameter,"Air_Pollution")==0&&(airPollution[i] > number)) 
 					{strcpy(qualifiedterritories[count],location[i]); count++;}
 
@@ -202,7 +259,8 @@ Q1(string location[], double baseLE[], double airPollution[], double ambientPM[]
 			else if(strcmp(parameter,"unsafeSex")==0 && (unsafeSex[i] > number))
 					{strcpy(qualifiedterritories[count],location[i]); count++;}
 		}
-		else if (strcmp(option, "less") == 0)
+
+		else if (strcmp(option, "less") == 0) //works the exact same way as above, but this time the condition is less than instead of greater than.
 		{
 			if(strcmp(parameter,"Air_Pollution")==0&&(airPollution[i] < number)) 
 					{strcpy(qualifiedterritories[count],location[i]); count++;}
@@ -247,252 +305,75 @@ Q1(string location[], double baseLE[], double airPollution[], double ambientPM[]
 					{strcpy(qualifiedterritories[count],location[i]); count++;}
 		}
 	}
-	return count;
+	return count; //return how many qualified or fulfilled the condition
 }
 
-void
-Q2_Question(string location[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose:
+	b. Parameters:
+	c. Return type:
+    
+	a. Question number, and the actual question.
+	b. Thereafter, type the answer number, and the corresponding expected answer.
+    
+    For example: 
+      Q1:  Which country has the lowest baseline life expectancy?
+      A1:  Lesotho
+*/
+/*void
+Q2(string location[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
 	double secondhandSmoke[], double unsafeSex[], int rowsOfData)
 {
-	int invalid = 1, topAverage = 3;
-	double tempCountry[5][14] = { {0} }, averagePlaceHolder[14] = { 0 },
-		avgAirPollution = 0, avgAmbientPM = 0, avgOzone = 0, avgHAP = 0, avgEnviron = 0, avgOccup = 0, avgUnsafeWash = 0, avgMetabolic = 0, avgDietary = 0, avgPlasma = 0, avgTobacco = 0, avgSmoking = 0,
-		avgSecondhandSmoke = 0, avgUnsafeSex = 0;
-
-	printf("Please input 5 territories: ");
-
-	//initialize
-	string territories[5];
-	strcpy(territories[0], "China");
-	strcpy(territories[1], "Dominican_Republic");
-	strcpy(territories[2], "Philippines");
-	strcpy(territories[3], "Taiwan");
-	strcpy(territories[4], "Japan");
-
-	while (invalid)
-	{
-		if (linearSearchString(location, territories[0], rowsOfData) != -1 && linearSearchString(location, territories[1], rowsOfData) != -1 &&
-			linearSearchString(location, territories[2], rowsOfData) != -1 && linearSearchString(location, territories[3], rowsOfData) != -1 &&
-			linearSearchString(location, territories[4], rowsOfData) != -1)
-		{
-			invalid = 0;
-
-			for (int i = 0; i < 5; i++)
-			{
-				tempCountry[i][0] = airPollution[linearSearchString(location, territories[i], rowsOfData)];
-				avgAirPollution = averagePlaceHolder[0] += tempCountry[i][0] / 5.0; //store average to array
-
-				tempCountry[i][1] = ambientPM[linearSearchString(location, territories[i], rowsOfData)];
-				avgAmbientPM = averagePlaceHolder[1] += tempCountry[i][1];
-
-				tempCountry[i][2] = ozone[linearSearchString(location, territories[i], rowsOfData)];
-				avgOzone = averagePlaceHolder[2] += tempCountry[i][2] / 5.0; //store average to array				
-
-				tempCountry[i][3] = HAP[linearSearchString(location, territories[i], rowsOfData)];
-				avgHAP = averagePlaceHolder[3] += tempCountry[i][3] / 5.0; //store average to array	
-
-				tempCountry[i][4] = environ[linearSearchString(location, territories[i], rowsOfData)];
-				avgEnviron = averagePlaceHolder[4] += tempCountry[i][4] / 5.0; //store average to array				
-
-				tempCountry[i][5] = occup[linearSearchString(location, territories[i], rowsOfData)];
-				avgOccup = averagePlaceHolder[5] += tempCountry[i][5] / 5.0; //store average to array				
-
-				tempCountry[i][6] = unsafeWash[linearSearchString(location, territories[i], rowsOfData)];
-				avgUnsafeWash = averagePlaceHolder[6] += tempCountry[i][6] / 5.0; //store average to array				
-
-				tempCountry[i][7] = metabolic[linearSearchString(location, territories[i], rowsOfData)];
-				avgMetabolic = averagePlaceHolder[7] += tempCountry[i][7] / 5.0; //store average to array				
-
-				tempCountry[i][8] = dietary[linearSearchString(location, territories[i], rowsOfData)];
-				avgDietary = averagePlaceHolder[8] += tempCountry[i][8] / 5.0; //store average to array				
-
-				tempCountry[i][9] = plasma[linearSearchString(location, territories[i], rowsOfData)];
-				avgPlasma = averagePlaceHolder[9] += tempCountry[i][9] / 5.0; //store average to array				
-
-				tempCountry[i][10] = tobacco[linearSearchString(location, territories[i], rowsOfData)];
-				avgTobacco = averagePlaceHolder[10] += tempCountry[i][10] / 5.0; //store average to array				
-
-				tempCountry[i][11] = smoking[linearSearchString(location, territories[i], rowsOfData)];
-				avgSmoking = averagePlaceHolder[11] += tempCountry[i][11] / 5.0; //store average to array				
-
-				tempCountry[i][12] = secondhandSmoke[linearSearchString(location, territories[i], rowsOfData)];
-				avgSecondhandSmoke = averagePlaceHolder[12] += tempCountry[i][12] / 5.0; //store average to array
-
-				tempCountry[i][13] = unsafeSex[linearSearchString(location, territories[i], rowsOfData)];
-				avgUnsafeSex = averagePlaceHolder[13] += tempCountry[i][13] / 5.0; //store average to array
-
-				selectionSortDouble(tempCountry[i], 14);
-
-				printf("\n\n%s's top 5 risk factors in descending order: \n", territories[i]);
-				for (int j = 0; j < 5; j++)
-				{
-					if (tempCountry[i][j] == airPollution[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. airPollution [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == ambientPM[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. ambientPM [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == ozone[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. ozone [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == HAP[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. HAP [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == environ[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. environ [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == occup[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. occup [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == unsafeWash[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. unsafeWash [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == metabolic[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. metabolic [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == dietary[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. dietary [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == plasma[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. plasma [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == tobacco[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. tobacco [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == smoking[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. smoking [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == secondhandSmoke[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. secondhandSmoke [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-					if (tempCountry[i][j] == unsafeSex[linearSearchString(location, territories[i], rowsOfData)])
-					{
-						printf("%d. unsafeSex [%lf] \n", j + 1, tempCountry[i][j]);
-					}
-				}
-			}
-			printf("How many do you want to average?\n\n");
+	
+}*/
 
 
-			selectionSortDouble(averagePlaceHolder, 14);
-			printf("Overall: \n");
-			for (int i = 0; i < topAverage; i++)
-			{
-				if (averagePlaceHolder[i] == avgAirPollution)
-					printf("%d. air pollution\n", i + 1);
-				if (averagePlaceHolder[i] == avgAmbientPM)
-					printf("%d. ambientPM\n", i + 1);
-				if (averagePlaceHolder[i] == avgOzone)
-					printf("%d. ozone\n", i + 1);
-				if (averagePlaceHolder[i] == avgHAP)
-					printf("%d. HAP\n", i + 1);
-				if (averagePlaceHolder[i] == avgEnviron)
-					printf("%d. environ\n", i + 1);
-				if (averagePlaceHolder[i] == avgOccup)
-					printf("%d. occup\n", i + 1);
-				if (averagePlaceHolder[i] == avgUnsafeWash)
-					printf("%d. unsafe wash\n", i + 1);
-				if (averagePlaceHolder[i] == avgMetabolic)
-					printf("%d. metabolic\n", i + 1);
-				if (averagePlaceHolder[i] == avgDietary)
-					printf("%d. dietary\n", i + 1);
-				if (averagePlaceHolder[i] == avgPlasma)
-					printf("%d. plasma\n", i + 1);
-				if (averagePlaceHolder[i] == avgTobacco)
-					printf("%d. tobacco\n", i + 1);
-				if (averagePlaceHolder[i] == avgSmoking)
-					printf("%d. smoking\n", i + 1);
-				if (averagePlaceHolder[i] == avgSecondhandSmoke)
-					printf("%d. secondHandSmoke\n", i + 1);
-				if (averagePlaceHolder[i] == avgUnsafeSex)
-					printf("%d. unsafe sex\n", i + 1);
-			}
-		}
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function is used to answer Question 3 by modifying the array found in main and assigning the correct values to them.
+	b. Parameters: This function uses location - countries that qualify the condition are copied into an array found in main.
+					Other parameters are the general self-explanatory param_risk_factor which are selected by the user and used as filters or conditions
+					int rowsOfData contains the number of data in the given dataset
+					double countryStats is the array that the function is modifying and storing correct values in
+	
+	Q3: How do <countryA> and <countryB>’s parameter risk factors compare? [algorithm(s): binary search] 
 
-		else
-		{
-			printf("Invalid input data. Please input a new dataset.");
-
-			//just to avoid looping if invalid, assume user enters something valid at some point in time
-			strcpy(territories[0], "China");
-			strcpy(territories[1], "Dominican_Republic");
-			strcpy(territories[2], "Philippines");
-			strcpy(territories[3], "Taiwan");
-			strcpy(territories[4], "Japan");
-		}
-
-	}
-
-}
-
-
-void Q3_Question(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
-	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
-	double secondhandSmoke[], double unsafeSex[], int rowsOfData)
+	A3: When Countries <China> and <Philippines> are selected. Their parameter risk factors comparison is as follows
+	China		Philippines
+	77.5821751	71.79842343
+	1.850731275	1.67568055
+	1.393518094	0.691634481
+	0.074187132	0.002370234
+	0.340365291 0.929484446
+	2.861275657	2.383616195
+	0.352631825	0.224456865
+	0.017427718	0.242926132
+	4.716209801	6.165007733
+	2.028727547	2.162167406
+	0.987177162	1.885343374
+	2.777920007	2.575556176
+	2.437863372	2.159934841
+	0.386616542	0.460447557
+	0.09001617	0.164648196
+*/
+void Q3(string location[],string country,int rowsOfData,double countryStats[],double baseLE[],double airPollution[],double ambientPM[],double ozone[],double HAP[],double environ[],double occup[],double unsafeWash[],double metabolic[],double dietary[],double plasma[],double tobacco[],double smoking[],double secondhandSmoke[],double unsafeSex[])
 {
-	int invalid = 1;
-
-	string country1, country2;
-	strcpy(country1, "China");
-	strcpy(country2, "Philippines");
-
-	while (invalid == 1)
-	{
-		if (linearSearchString(location, country1, rowsOfData) != -1 && linearSearchString(location, country2, rowsOfData) != -1)
-		{
-			invalid = 0;
-			printf("\n\n%s\t\t\t%s\n\n"
-				"%lf\t\t%lf | baseLineLE\n"
-				"%lf\t\t%lf | LE Air Pollution\n"
-				"%lf\t\t%lf | Ambient PM\n"
-				"%lf\t\t%lf | Ozone\n"
-				"%lf\t\t%lf | HAP\n"
-				"%lf\t\t%lf | environ\n"
-				"%lf\t\t%lf | occup\n"
-				"%lf\t\t%lf | unsafe wash\n"
-				"%lf\t\t%lf | metabolic\n"
-				"%lf\t\t%lf | dietary\n"
-				"%lf\t\t%lf | high fasting plasma glucose\n"
-				"%lf\t\t%lf | tobacco\n"
-				"%lf\t\t%lf | smoking\n"
-				"%lf\t\t%lf | secondhand smoke\n"
-				"%lf\t\t%lf | unsafe sex\n", country1, country2, baseLE[linearSearchString(location, country1, rowsOfData)], baseLE[linearSearchString(location, country2, rowsOfData)],
-				airPollution[linearSearchString(location, country1, rowsOfData)], airPollution[linearSearchString(location, country2, rowsOfData)],
-				ambientPM[linearSearchString(location, country1, rowsOfData)], ambientPM[linearSearchString(location, country2, rowsOfData)],
-				ozone[linearSearchString(location, country1, rowsOfData)], ozone[linearSearchString(location, country2, rowsOfData)],
-				HAP[linearSearchString(location, country1, rowsOfData)], HAP[linearSearchString(location, country2, rowsOfData)],
-				environ[linearSearchString(location, country1, rowsOfData)], environ[linearSearchString(location, country2, rowsOfData)],
-				occup[linearSearchString(location, country1, rowsOfData)], occup[linearSearchString(location, country2, rowsOfData)],
-				unsafeWash[linearSearchString(location, country1, rowsOfData)], unsafeWash[linearSearchString(location, country2, rowsOfData)],
-				metabolic[linearSearchString(location, country1, rowsOfData)], metabolic[linearSearchString(location, country2, rowsOfData)],
-				dietary[linearSearchString(location, country1, rowsOfData)], dietary[linearSearchString(location, country2, rowsOfData)],
-				plasma[linearSearchString(location, country1, rowsOfData)], plasma[linearSearchString(location, country2, rowsOfData)],
-				tobacco[linearSearchString(location, country1, rowsOfData)], tobacco[linearSearchString(location, country2, rowsOfData)],
-				smoking[linearSearchString(location, country1, rowsOfData)], smoking[linearSearchString(location, country2, rowsOfData)],
-				secondhandSmoke[linearSearchString(location, country1, rowsOfData)], secondhandSmoke[linearSearchString(location, country2, rowsOfData)],
-				unsafeSex[linearSearchString(location, country1, rowsOfData)], unsafeSex[linearSearchString(location, country2, rowsOfData)]);
-		}
-		else
-		{
-			printf("Invalid input(s). Please enter a new set of data.\n");
-			//if(valid)
-			invalid = 0;
-		}
-	}
+	int index = linearSearchString(location,country,rowsOfData);
+	countryStats[0] = baseLE[index];
+	countryStats[1] = airPollution[index];
+	countryStats[2] = ambientPM[index];
+	countryStats[3] = ozone[index];
+	countryStats[4] = HAP[index];
+	countryStats[5] = environ[index];
+	countryStats[6] = occup[index];
+	countryStats[7] = unsafeWash[index];
+	countryStats[8] = metabolic[index];
+	countryStats[9] = dietary[index];
+	countryStats[10] = plasma[index];
+	countryStats[11] = tobacco[index];
+	countryStats[12] = smoking[index];
+	countryStats[13] = secondhandSmoke[index];
+	countryStats[14] = unsafeSex[index];
 }
 
 void Q4_Answer(string location[], double baseLE[], int rowsOfData, string option) {
@@ -714,10 +595,11 @@ main()
 
 	/************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
 	 *****************************************************************************|T-W-O|************************************************************************/
-	printf("Set Parameters for Q2: What are the top 5 factors affecting life expectancy for each of the following territories, <5_territories>, arranged in descending order of value, and what are their top <number> average leading factors?\n");
+	
+	/*printf("Set Parameters for Q2: What are the top 5 factors affecting life expectancy for each of the following territories, <5_territories>, arranged in descending order of value, and what are their top <number> average leading factors?\n");
 	string territories[5] ={{' '}};
 	int topAverages = 0;
-	double sortedArray[5][14] ={{0}};
+	double 
 	double average[14]={0};
 
 	//pre-assign inputs to arrays and variables
@@ -731,19 +613,34 @@ main()
 	//re-print question to answer
 	printf("> Q2: What are the top 5 factors affecting life expectancy for each of the following territories, %s %s %s %s %s, arranged in descending order of value, and what are their top %d average leading factors?\n",territories[0],territories[1],territories[2],territories[3],territories[4],topAverages);
 	
+	Q2()*/
+
 	/*************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
-	 ************************************************************************** *|T-H-R-E-E|************************************************************************/
+	 ****************************************************************************|T-H-R-E-E|************************************************************************/
 	printf("Set Parameters for Q3: How do <countryA> and <countryB>'s parameter risk factors compare?\n");
 	string countryA = {' '}, countryB = {' '};
-	
+	double countryAStats[15] ={0}, countryBStats[15];
 
-	//assign values to arrays
-	
-	
-	//Set values for parameters required to answer the question.
-	strcpy(option, "greater");
-	strcpy(param_risk_factor, "Air_Pollution");	
-	number = 2.5;
+	//pre-assign values
+	strcpy(countryA,"China"); strcpy(countryB,"Philippines");
+
+	//handle invalid inputs
+	if(linearSearchString(location, countryA,rowsOfData)==-1 || linearSearchString(location, countryB,rowsOfData)==-1)
+		printf("Invalid input. Please input valid territories");
+
+	//transfer from multiple arrays into one array for the specified country
+	Q3(location,countryA,rowsOfData,countryAStats,baseLE, airPollution,ambientPM,ozone,HAP,environ,occup,unsafeWash,metabolic,dietary,plasma,tobacco,smoking,secondhandSmoke,unsafeSex);
+	Q3(location,countryB,rowsOfData,countryBStats,baseLE, airPollution,ambientPM,ozone,HAP,environ,occup,unsafeWash,metabolic,dietary,plasma,tobacco,smoking,secondhandSmoke,unsafeSex);
+
+	//values printer using array's content
+	printf("\n\n%s\t\t\t%s",countryA,countryB);
+	for(int i=0;i<15;i++)
+	{
+		printf("\n%lf\t\t%lf",countryAStats[i],countryBStats[i]);
+	}
+
+	/*************************************************************************|Q-U-E-S-T-I-O-N|*************************************************************************
+	 *****************************************************************************|F-O-U-R|************************************************************************/
 
     /* 
        Call the function that answers a question. Thereafter, use printf() to print the question 
@@ -761,18 +658,6 @@ main()
        (linear or binary search), there should be a test case, i.e., a  function 
        call with a search key parameter that does not exist, i.e., NOT FOUND scenario.
     */
-
-	/*printDataSet(location, baseLE, airPollution, ambientPM, ozone, HAP,
-		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);*/
-
-	Q2_Question(location, airPollution, ambientPM, ozone, HAP,
-		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
-
-	Q3_Question(location, baseLE, airPollution, ambientPM, ozone, HAP,
-		environ, occup, unsafeWash, metabolic, dietary,
-		plasma, tobacco, smoking, secondhandSmoke, unsafeSex, rowsOfData);
 
 	Q4_Question(location, baseLE, rowsOfData);
 	Q5_Question(location, baseLE, airPollution, ambientPM, ozone, HAP, environ, occup,
