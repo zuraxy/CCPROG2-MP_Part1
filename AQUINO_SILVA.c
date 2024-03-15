@@ -69,12 +69,6 @@ typedef char string[50]; //32 highest string length in data provided but for buf
     may not be easy to understand to the person reading the codes. 
 */
 
-/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
-	a. Purpose: This function retrieves the dataset fed/provided to it by using the scan function to get values.
-	b. Parameters: The parameters serve as the dataset's parameter risk factors (while also including the location and the Base Life Expectancy)
-	c. Return type: This function returns an integer value which indicates how many rows of values were retrieved and scanned  
-*/
-
 /*	<<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
 	a. Purpose: 	This function switches the values of 2 array elements with data type double
 	b. Parameters: 	A[] is where the values will be stored
@@ -90,6 +84,12 @@ void doubleSwitch(double A[], int i, int j) {
 	A[i] = A[j];
 	A[j] = temp;
 }
+
+/* <<<<<<<<<<FUNCTION HEADER COMMENT>>>>>>>>>>>
+	a. Purpose: This function retrieves the dataset fed/provided to it by using the scan function to get values.
+	b. Parameters: The parameters serve as the dataset's parameter risk factors (while also including the location and the Base Life Expectancy)
+	c. Return type: This function returns an integer value which indicates how many rows of values were retrieved and scanned  
+*/
 
 int
 getDataSet(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
