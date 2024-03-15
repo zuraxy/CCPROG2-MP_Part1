@@ -1,6 +1,6 @@
 #include "definitions.h"
 
-inline
+//inline
 int
 Q1_Answer(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
@@ -56,7 +56,7 @@ Q1_Answer(string location[], double baseLE[], double airPollution[], double ambi
 	return count;
 }
 
-inline
+//inline
 void
 Q1_Question(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double

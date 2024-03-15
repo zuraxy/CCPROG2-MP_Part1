@@ -1,6 +1,6 @@
 #include "definitions.h"
 
-inline
+//inline
 void
 Q3_Question(string location[], double baseLE[], double airPollution[], double ambientPM[], double ozone[], double HAP[], double
 	environ[], double occup[], double unsafeWash[], double metabolic[], double dietary[], double plasma[], double tobacco[], double smoking[],
