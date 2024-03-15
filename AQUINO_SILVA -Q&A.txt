@@ -1,0 +1,188 @@
+5 Questions and Answers
+
+General Direction: Replace the underlines with the appropriate entries.
+
+
+LASTNAME1, FIRSTNAME1: AQUINO, Bon Windel E.               SECTION1: S11A 
+LASTNAME2, FIRSTNAME2: SILVA, Paulo Grane Gabriel C.     SECTION2: S12A
+
+
+Encode your questions below.  Indicate as well the algorithm(s) to be used in answering each question.
+Questions with parameter(s) should have the parameter(s) encoded in angled brackets, for example, <parameter-name>. 
+
+Q1: How many countries have values <greater/less> than <number> in <param_risk_factor>? Also, what are the names of these countries? (print array of strings) [algorithm(s): count]
+
+Q2: What are the top 5 factors affecting life expectancy for each of the following countries, <5_countries>, arranged in descending order of value, and what are their top <number> average leading factors? (print array of strings) [algorithm(s): linear search or binary search after sorting, average, selection sort]
+
+Q3: How do <countryA> and <countryB>’s parameter risk factors compare? [algorithm(s): binary search] 
+
+Q4: Identifying Outliers: Are there locations that have values <greater/less> than the average value of life expectancy (not including global)? If yes, how many? (print array of strings) [algorithm(s): Count, average]
+
+Q5: Indicate and compare the countries with minimum and maximum LE. For each of the two countries, how many factors affecting LE exceed the value of <number>, and what are those identified factors, arranged in ascending order for each? (print array of strings) [algorithm(s): minimum, maximum, count, selection sort]
+
+Encode the expected answers to the questions below. For question with parameter(s), indicate explicitly the actual parameter value(s). 
+
+Q1: How many countries have values <greater/less> than <number> in <param_risk_factor>? Also, what are the names of these countries? (print array of strings) [algorithm(s): count]
+
+A1: When <greater/less> is set to “greater”, <number> is set to 2.5, and <param_risk_factor> is set to “Air_Pollution”, the answer is as follows.
+22 countries
+
+(Note: the following can be listed in any order)
+Benin
+Haiti
+Myanmar
+Mali
+Guinea-Bissau
+Madagascar
+Afghanistan
+India
+Sierra_Leone
+Burkina_Faso
+Laos
+Guinea
+Pakistan
+Chad
+Bangladesh
+Vanuatu
+Somalia
+Nepal
+Niger
+North_Korea
+Papua_New_Guinea
+Solomon_Islands
+
+When <greater/less> is set to “less”, <number> is set to 0.2, and <param_risk_factor> is set to “Tobacco”, the answer is as follows.
+13 countries
+
+(Note: the following can be listed in any order)
+Finland
+Sweden
+Iceland
+New_Zealand
+Norway
+Australia
+Estonia
+Puerto_Rico
+Canada
+Ireland
+Bermuda
+Greenland
+Portugal
+
+When <greater/less> is set to “something_else”, <number> is set to 1.5, and <param_risk_factor> is set to “Air_Pollution”, the answer is as follows.
+Invalid. Please input either “greater” or “less” only.
+
+When <greater/less> is set to “less”, <number> is set to 1.5, and <param_risk_factor> is set to “something_else”, the answer is as follows.
+Invalid. Please input one of the listed factors that affect life expectancy.
+
+When <greater/less> is set to “something_else”, <number> is set to 1.5, and <param_risk_factor> is set to “something_else”, the answer is as follows.
+Invalid. Please input either “greater” or “less” only. Please input one of the listed factors that affect life expectancy.
+
+Q2: What are the top 5 factors affecting life expectancy for each of the following countries, <5_countries>, arranged in descending order of value, and what are their top <number> average leading factors? (print array of strings) [algorithm(s): linear search or binary search after sorting, average, selection sort]
+
+A2: When <5_countries> is set to “China Dominican_Republic Philippines Taiwan Japan” and <number> is set to 3, the answer is as follows.
+
+China
+1. Metabolic
+2. Environ/Occup
+3. Tobacco
+4. Smoking
+5. Dietary
+
+Dominican_Republic
+1. Metabolic
+2. Dietary
+3. High_fasting_plasma_glucose
+4. Tobacco
+5. Environ/Occup
+
+Philippines
+1. Metabolic
+2. Tobacco
+3. Environ/Occup
+4. Dietary
+5. Smoking
+
+Taiwan
+1. Metabolic
+2. Tobacco
+3. Smoking
+4. High_fasting_plasma_glucose
+5. Environ/Occup
+
+Japan
+1. Metabolic
+2. Tobacco
+3. Smoking
+4. Dietary
+5. Environ/Occup
+
+Overall
+1. Metabolic
+2. Tobacco
+3. Smoking
+
+
+When <5_countries> is set to “Asia Antarctica Philippines Thailand Japan” and <number> is set to 5, the answer is as follows.
+Invalid. Please make sure that all listed countries are valid.
+
+Q3: How do <countryA> and <countryB>’s parameter risk factors compare? [algorithm(s): binary search] 
+
+A3: When Countries <China> and <Philippines> are selected. Their parameter risk factors comparison is as follows
+China							Philippines
+Baseline LE				77.5821751	71.79842343
+LE Air Pollution			1.850731275	1.67568055
+LE Ambient PM			1.393518094	0.691634481
+LE Ozone				0.074187132	0.002370234
+LE HAP				0.340365291.  0.929484446
+LE Environ/Occup			2.861275657	2.383616195
+LE Occup				0.352631825	0.224456865
+LE Unsafe WaSH			0.017427718	0.242926132
+LE Metabolic				4.716209801	6.165007733
+LE Dietary				2.028727547	2.162167406
+LE High fasting plasma glucose	0.987177162	1.885343374
+LE Tobacco				2.777920007	2.575556176
+LE Smoking				2.437863372	2.159934841
+LE Secondhand Smoke		0.386616542	0.460447557
+LE Unsafe Sex			0.09001617	0.164648196
+
+Q4: Identifying Outliers: Are there locations that have values <greater/less> than the average value of life expectancy (not including global)? If yes, how many? (print array of strings) [algorithm(s): Count, average]
+A4: When <greater> than the average value of life expectancy (72.85670773 years), prints 116 countries: 
+Global, China, North_Korea, Taiwan, Cambodia, Indonesia, Laos, Malaysia, Maldives, Myanmar, Philippines, Sri_Lanka, Thailand, Timor-Leste, Vietnam, Fiji, Kiribati, Marshall_Islands, Micronesia, Papua_New_Guinea, Samoa, Solomon_Islands, Tonga, Vanuatu, Armenia, Azerbaijan, Georgia, Kazakhstan, Kyrgyzstan, Mongolia, Tajikistan, Turkmenistan, Uzbekistan, Albania, Bosnia_and_Herzegovina, Bulgaria, Croatia, Czechia, Hungary, North_Macedonia, Montenegro, Poland, Romania, Serbia, Slovakia, Slovenia, Belarus, Estonia, Latvia, Lithuania, Moldova, Russia, Ukraine, Brunei, Japan, South_Korea, Singapore, Australia, New_Zealand, Andorra, Austria, Belgium, Cyprus, Denmark, Finland, France, Germany, Greece, Iceland, Ireland, Israel, Italy, Luxembourg, Malta, Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, UK, Argentina, Chile, Uruguay, Canada, USA, Antigua_and_Barbuda, Bahamas, Barbados, Belize, Cuba, Dominica, Dominican_Republic, Grenada, Guyana, Haiti, Jamaica, Saint_Lucia, Saint_Vincent_and_the_Grenadines, Suriname, Trinidad_and_Tobago, Bolivia, Ecuador, Peru, Colombia, Costa_Rica, El_Salvador, Guatemala, Honduras, Mexico, Nicaragua, Panama, Venezuela, Brazil, Paraguay, Algeria, Bahrain, Egypt, Iran, Iraq, Jordan, Kuwait, Lebanon, Libya, Morocco, Palestine, Oman, Qatar, Saudi_Arabia, Syria, Tunisia, Turkey, UAE, Yemen, Afghanistan, Bangladesh, Bhutan, India, Nepal, Pakistan, Angola, Central_African_Republic, Congo, Congo-Kinshasa, Equatorial_Guinea, Gabon, Burundi, Comoros, Djibouti, Eritrea, Ethiopia, Kenya, Madagascar, Malawi, Mauritius, Mozambique, Rwanda, Seychelles, Somalia, Tanzania, Uganda, Zambia, Botswana, Lesotho, Namibia, South_Africa, Eswatini, Zimbabwe, Benin, Burkina_Faso, Cameroon, Cabo_Verde, Chad, Gambia, Ghana, Guinea, Guinea-Bissau, Liberia, Mali, Mauritania, Niger, Nigeria, Sao_Tome_and_Principe, Senegal, Sierra_Leone, Togo, American_Samoa, Bermuda, Cook_Islands, Greenland, Guam, Monaco, Nauru, Niue, Northern_Mariana_Islands, Palau, Puerto_Rico, Saint_Kitts_and_Nevis, San_Marino, Tokelau, Tuvalu, South_Sudan, Sudan
+
+A4: When <lesser> than the average value of life expectancy (72.85670773 years), prints 87 countries: 
+Global, China, North_Korea, Taiwan, Malaysia, Maldives, Sri_Lanka, Thailand, Vietnam, Tonga, Armenia, Georgia, Kyrgyzstan, Albania, Bosnia_and_Herzegovina, Bulgaria, Croatia, Czechia, Hungary, North_Macedonia, Montenegro, Poland, Romania, Serbia, Slovakia, Slovenia, Belarus, Estonia, Latvia, Lithuania, Moldova, Russia, Brunei, Japan, South_Korea, Singapore, Australia, New_Zealand, Andorra, Austria, Belgium, Cyprus, Denmark, Finland, France, Germany, Greece, Iceland, Ireland, Israel, Italy, Luxembourg, Malta, Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, UK, Argentina, Chile, Uruguay, Canada, USA, Antigua_and_Barbuda, Bahamas, Barbados, Belize, Cuba, Dominican_Republic, Grenada, Jamaica, Saint_Lucia, Saint_Vincent_and_the_Grenadines, Trinidad_and_Tobago, Ecuador, Peru, Colombia, Costa_Rica, El_Salvador, Mexico, Nicaragua, Panama, Venezuela, Brazil, Paraguay, Algeria, Bahrain, Iran, Iraq, Jordan, Kuwait, Lebanon, Libya, Morocco, Palestine, Oman, Qatar, Saudi_Arabia, Syria, Tunisia, Turkey, UAE, Bangladesh, Bhutan, Mauritius, Seychelles, Cabo_Verde, Bermuda, Cook_Islands, Greenland, Guam, Monaco, Puerto_Rico, San_Marino
+
+Q5: Indicate and compare the countries with minimum and maximum LE. For each of the two countries, how many factors affecting LE exceed the value of <number>, and what are those identified factors, arranged in ascending order for each? (print array of strings) [algorithm(s): minimum, maximum, count, selection sort]
+	
+A5: When <number> is set to 1.0, the answer is as follows.
+Country with minimum LE: Lesotho
+8 factors
+Smoking
+High_fasting_plasma_glucose
+Unsafe_WaSH
+Tobacco
+Air_Pollution
+Metabolic
+Environ/Occup
+Unsafe_Sex
+
+Country with maximum LE: Singapore
+4 factors
+Smoking
+Dietary
+Tobacco
+Metabolic
+
+When <number> is set to 2.0, the answer is as follows.
+Country with minimum LE: Lesotho
+3 factors
+Metabolic
+Environ/Occup
+Unsafe_Sex
+
+Country with maximum LE: Singapore
+1 factors
+Metabolic
+
+Do NOT forget to rename this text file with your own name(s) and submit it via Canvas!!!
